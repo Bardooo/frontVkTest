@@ -36,6 +36,75 @@ body {
 
 .navigation {
   padding: 0 20px 0 20px;
+  margin: 20px 0 20px 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.privacy {
+  display: flex;
+  &-text {
+    margin-right: 12px;
+  }
+}
+
+.color {
+  display: flex;
+  &-text {
+    margin-right: 12px;
+  }
+}
+
+.having-friends {
+  display: flex;
+  &-text {
+    margin-right: 12px;
+  }
+}
+
+.drop {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 17px;
+  &:hover {
+    opacity: 0.5;
+    transition: opacity 0.3s;
+  }
+}
+
+.error-app {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  height: 400px;
+  display: grid;
+  align-items: center;
+}
+
+.error-main {
+  text-align: center;
+}
+
+.error-title {
+  height: 40px;
+  line-height: 30px;
+  font-weight: 700;
+  font-size: 35px;
+  margin-bottom: 30px;
+}
+
+.null-app {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  height: 200px;
+}
+
+.null-title {
+  margin-bottom: 20px;
+}
+
+.null-text {
+  padding: 0 20px;
 }

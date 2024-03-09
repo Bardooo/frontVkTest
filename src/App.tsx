@@ -11,22 +11,20 @@ interface GetGroupsResponse {
 function App() {
   const [groups, setGroups] = useState([]);
   const [colors, setColors] = useState([]);
-  const initialData = useRef();
+  const [error, setError] = useState(false);
+  const [result, setResult] = useState(0);
+  const initialData = useRef([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const { data, result } = await axios.get<GetGroupsResponse>(
-          'http://localhost:3000/groups.json',
-        );
-        console.log(data);
-
-        setGroups(data);
-        initialData.current = data;
-        receptionColors(data);
-      } catch (error) {
-        alert('Ошибка при запросе данных');
-        console.log(error);
+        const response = await axios.get<GetGroupsResponse>('http://localhost:3000/groups.json');
+        setResult(response.data.result);
+        setGroups(response.data.data);
+        initialData.current = response.data.data;
+        receptionColors(response.data.data);
+      } catch (err) {
+        setError(true);
       }
     }
     setTimeout(() => {
@@ -49,7 +47,7 @@ function App() {
       setTimeout(() => {
         setGroups(
           initialData.current.filter((item) => {
-            return item.closed === false;
+            return !item.closed;
           }),
         );
       }, 1000);
@@ -57,7 +55,7 @@ function App() {
       setTimeout(() => {
         setGroups(
           initialData.current.filter((item) => {
-            return item.closed === true;
+            return item.closed;
           }),
         );
       }, 1000);
@@ -97,7 +95,7 @@ function App() {
       setTimeout(() => {
         setGroups(
           initialData.current.filter((item) => {
-            return item.friends === undefined;
+            return !item.friends;
           }),
         );
       }, 1000);
@@ -108,46 +106,73 @@ function App() {
     }
   };
 
-  return (
-    <div className="app">
-      <h1 className="title">Группы</h1>
-      <div className="navigation">
-        <div className="privacy">
-          <p className="privacy-text">Тип приватности: </p>
-          <select className="privacy-input" name="privacy-input" onChange={privacyFilter}>
-            <option value="все">все</option>
-            <option value="открытые">открытые</option>
-            <option value="закрытые">закрытые</option>
-          </select>
-        </div>
-        <div className="color">
-          <p className="color-text">Цвет аватарки: </p>
-          <select className="color-input" name="color-input" onChange={colorFilter}>
-            <option value="все">все</option>
-            {colors.map((el, index) => (
-              <option value={el} key={index}>
-                {el}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="having-friends">
-          <p className="having-friends-text">Наличие друзей: </p>
-          <select
-            className="having-friends-input"
-            name="having-friends-input"
-            onChange={friendsFilter}>
-            <option value="все">все</option>
-            <option value="есть">есть</option>
-            <option value="нет">нет</option>
-          </select>
+  const dropFilters = () => {
+    setTimeout(() => {
+      setGroups(initialData.current);
+    }, 1000);
+  };
+
+  if (error || !groups) {
+    return (
+      <div className="error-app">
+        <div className="error-main">
+          <h4 className="error-title">Ошибка при запросе данных с сервера!!</h4>
+          <p className="error-text">Повторите попытку чуть позже</p>
         </div>
       </div>
-      {groups.map((item, index) => (
-        <Group index={index} item={item} />
-      ))}
-    </div>
-  );
+    );
+  } else if (result === 0 || groups.length === 0) {
+    return (
+      <div className="null-app">
+        <h1 className="null-title title">Группы</h1>
+        <p className="null-text">Акутальных групп пока нет...(</p>
+      </div>
+    );
+  } else {
+    return (
+      <div className="app">
+        <h1 className="title">Группы</h1>
+        <div className="navigation">
+          <div className="privacy">
+            <p className="privacy-text">Тип приватности: </p>
+            <select className="privacy-input" name="privacy-input" onChange={privacyFilter}>
+              <option value="все">все</option>
+              <option value="открытые">открытые</option>
+              <option value="закрытые">закрытые</option>
+            </select>
+          </div>
+          <div className="color">
+            <p className="color-text">Цвет аватарки: </p>
+            <select className="color-input" name="color-input" onChange={colorFilter}>
+              <option value="все">все</option>
+              {colors.map((el, index) => (
+                <option value={el} key={index}>
+                  {el}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="having-friends">
+            <p className="having-friends-text">Наличие друзей: </p>
+            <select
+              className="having-friends-input"
+              name="having-friends-input"
+              onChange={friendsFilter}>
+              <option value="все">все</option>
+              <option value="есть">есть</option>
+              <option value="нет">нет</option>
+            </select>
+          </div>
+          <div className="drop" onClick={dropFilters}>
+            сбросить фильтры
+          </div>
+        </div>
+        {groups.map((item, index) => (
+          <Group index={index} item={item} />
+        ))}
+      </div>
+    );
+  }
 }
 
 export default App;
