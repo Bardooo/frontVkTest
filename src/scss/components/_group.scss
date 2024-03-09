@@ -1,0 +1,47 @@
+.group {
+  margin: 0 20px 0 20px;
+  padding: 12px 0 12px 0;
+  display: flex;
+  border-bottom: 1px solid #dce1e6;
+  &:last-child {
+    border: none;
+  }
+}
+
+.ava {
+  border: 1px solid #626D7A;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  margin-right: 12px;
+}
+
+.main {
+  padding-top: 7px;
+}
+
+.item-title {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 6px;
+  color: rgb(42, 88, 133);
+}
+
+.type {
+  color: #626D7A;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.subscribers {
+  color: #626D7A;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.friends {
+  color: #626D7A;
+  font-size: 15px;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
