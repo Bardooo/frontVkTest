@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get<GetGroupsResponse>('http://localhost:3000/groups.json');
+        const response = await axios.get<GetGroupsResponse>('https://bardooo.github.io/frontVkTest/groups.json');
         setResult(response.data.result);
         setGroups(response.data.data);
         initialData.current = response.data.data;
