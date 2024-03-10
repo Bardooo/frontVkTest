@@ -1,11 +1,11 @@
 import {useState, FC} from 'react';
 import { Block } from 'jsxstyle';
 import Modal from '../components/Modal';
-import { Group } from '../types'
+import { GroupType } from '../types'
 
 type GroupProps = {
   key: number;
-  item: Group;
+  item: GroupType;
 };
 
 const Group: FC<GroupProps> = ({ key, item }) => {
