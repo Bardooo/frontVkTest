@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/frontVkTest/static/css/main.7a43f7a8.css",
+    "main.js": "/frontVkTest/static/js/main.52fb8e6e.js",
+    "index.html": "/frontVkTest/index.html",
+    "static/media/close.svg": "/frontVkTest/static/media/close.2001e956d267bc9b1a2349ee0a8ee521.svg",
+    "main.7a43f7a8.css.map": "/frontVkTest/static/css/main.7a43f7a8.css.map",
+    "main.52fb8e6e.js.map": "/frontVkTest/static/js/main.52fb8e6e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7a43f7a8.css",
+    "static/js/main.52fb8e6e.js"
+  ]
+}
