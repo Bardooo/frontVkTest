@@ -1,12 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './scss/App.scss';
+import { GetGroupsResponse } from './types'
 import Group from './components/Group';
-
-interface GetGroupsResponse {
-  result: 1 | 0;
-  data?: Group[];
-}
 
 function App() {
   const [groups, setGroups] = useState([]);
@@ -168,7 +164,7 @@ function App() {
           </div>
         </div>
         {groups.map((item, index) => (
-          <Group index={index} item={item} />
+          <Group key={index} item={item} />
         ))}
       </div>
     );

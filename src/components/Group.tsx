@@ -1,31 +1,18 @@
-import React, {useState} from 'react';
+import {useState, FC} from 'react';
 import { Block } from 'jsxstyle';
 import Modal from '../components/Modal';
+import { Group } from '../types'
 
 type GroupProps = {
-  index: number;
+  key: number;
   item: Group;
 };
 
-interface Group {
-  id: number;
-  name: string;
-  closed: boolean;
-  avatar_color?: string;
-  members_count: number;
-  friends?: User[];
-}
-
-interface User {
-  first_name: string;
-  last_name: string;
-}
-
-const Group: React.FC<GroupProps> = ({ index, item }) => {
+const Group: FC<GroupProps> = ({ key, item }) => {
   const [modalOpen, setModalOpen] = useState(false)
 
   return (
-    <div className="group" key={index}>
+    <div className="group" key={key}>
       <Block className="ava" background-color={item.avatar_color}></Block>
       <div className="main">
         <h1 className="item-title">{item.name}</h1>

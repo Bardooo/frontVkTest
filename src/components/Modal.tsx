@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Transition } from 'react-transition-group';
 import closeImg from '../assets/img/close.svg';
+import { User } from '../types'
 
 type ModalProps = {
   isOpen: boolean;
@@ -8,12 +9,7 @@ type ModalProps = {
   info: User[];
 };
 
-interface User {
-  first_name: string;
-  last_name: string;
-}
-
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, info }) => {
+const Modal: FC<ModalProps> = ({ isOpen, onClose, info }) => {
   const onWrapperClick = (event) => {
     if (event.target.classList.contains('modal-wrapper')) onClose();
   };
